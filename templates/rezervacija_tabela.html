@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if rola == 'administrator' or rola == 'recepcija' %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/hotel.jpg" alt="Logo" width="100" height="80" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_naslovna')}}">POČETNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_sobe') }}">SMEŠTAJ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_korisnici')}}">KORISNICI</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_rezervacijaTabela')}}">REZERVACIJE</a>
+                </li>
+              
+               
+                
+                    
+                    {% if rola %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('odjava') }}" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endif %}
+<div class="container">
+    <div class="row my-5 justify-content-end">
+        <a href="{{ url_for('render_rezervacija') }}">
+            <button class="btn btn-outline-secondary">
+            Dodaj rezervaciju
+            </button>
+        </a>
+    </div>
+    <div class="row">
+        <ul class="pagination justify-content-center mt-3">
+            <li class="page-item {% if strana == 1 %} disabled {% endif %}">
+                <a class="page-link" href="{{ url_for('render_rezervacijaTabela', strana=strana-1) }}">Prethodna</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">{{ strana }}</a></li>
+            <!-- Povežite Sledeća sa odgovarajućom rutom i parametrima -->
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('render_rezervacijaTabela', strana=strana+1) }}">Sledeća</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Broj odraslih</th>
+                    <th scope="col">Tip smestaja</th>
+                    <th scope="col">Datum dolaska</th>
+                    <th scope="col">Datum odlaska</th>
+                    <th scope="col">Dorucak</th>
+                    <th scope="col">Svrha</th>
+                    <th scope="col">Poruka</th>
+                    <th scope="col">Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rez in rezervacija %}
+                <tr>
+                    <td>{{rez.ime}}</td>
+                    <td>{{rez.prezime}}</td>
+                    <td>{{rez.email}}</td>
+                    <td>{{rez.broj_odraslih}}</td>
+                    <td>{{rez.tip}}</td>
+                    <td>{{rez.datum_dolaska}}</td>
+                    <td>{{rez.datum_odlaska}}</td>
+                    <td>{{rez.dorucak}}</td>
+                    <td>{{rez.svrha}}</td>
+                    <td>{{rez.poruka}}</td>
+                    <td class="row">
+                        <form action="{{ url_for('rezervacija_izmena', id=rez.id) }}" method="GET" class="text-warning mx-1">
+                            <button class="text-warning mx-1">
+                              <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                          </form>
+
+                        <form action="{{ url_for("rezervacija_brisanje", id=rez.id) }}" method="POST" class="text-danger mx-1">
+                         <button class="text-danger mx-1">
+                          <i class="fas fa-trash"></i>
+                          </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

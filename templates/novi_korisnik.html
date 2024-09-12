@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xs-12">
+            <form action="{{ url_for('render_novi') }}" method="POST" class=""> 
+                <div class="form-group">
+                    <label for="ime">Ime</label>
+                    <input type="text" class="form-control" name="ime" required>
+                    <label for="prezime">Prezime</label>
+                    <input type="text" class="form-control" name="prezime" required>
+                <label for="email">Email adresa</label>
+                <input type="email" name="email" class="form-control" required>
+                <label for="lozinka">Lozinka</label>
+                <input type="password" class="form-control" name="lozinka" required>
+
+                <div class="form-group">
+                    <select name="rola" class="form-control">
+                        <option selected disabled>--</option>
+                        <option value="administrator">Administrator</option>
+                        <option value="gost">Gost</option>
+                        <option value="recepcija">Recepcija</option>
+                    </select>
+                </div>
+            
+                <input type="submit" class="btn btn-outline-secondary" role="button" value="REGISTRUJ SE">
+             
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+  {% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if rola == 'administrator' or rola == 'recepcija' %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/hotel.jpg" alt="Logo" width="100" height="80" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_naslovna')}}">POČETNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_sobe') }}">SMEŠTAJ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_korisnici')}}">KORISNICI</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_rezervacijaTabela')}}">REZERVACIJE</a>
+                </li>
+              
+                <li class="nav-item">
+                    
+                    {% if rola %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('odjava') }}" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="nav justify-content-center">
+  
+    <li class="nav-item">
+        <i class="fa-regular fa-envelope"></i>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="mailto:info@hotel.com">info@hotel.com</a>
+      </li>
+      <li class="nav-item">
+        <i class="fa-solid fa-phone"></i>
+      </li>
+   
+      <li class="nav-item">
+        <a class="nav-link" href="tel:+38166576344">066576344</a>
+      </li>
+  </ul>
+  <hr>
+  <div class="text-center">
+    <img src="/static/images/hotel.jpg" class="rounded" alt="hotel">
+  </div>
+
+    {% else %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/hotel.jpg" alt="Logo" width="100" height="80" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_naslovna')}}">POČETNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_sobe') }}">SMEŠTAJ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_onama')}}">O NAMA</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_kontakt')}}">KONTAKT</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('render_rezervacija')}}" role="button" class="btn btn-outline-secondary">REZERVIŠI ODMAH</a>
+                </li>
+                <li class="nav-item">
+                    
+                    {% if rola %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('odjava') }}" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="nav justify-content-center">
+  
+    <li class="nav-item">
+        <i class="fa-regular fa-envelope"></i>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="mailto:info@hotel.com">info@hotel.com</a>
+      </li>
+      <li class="nav-item">
+        <i class="fa-solid fa-phone"></i>
+      </li>
+   
+      <li class="nav-item">
+        <a class="nav-link" href="tel:+38166576344">066576344</a>
+      </li>
+  </ul>
+  <hr>
+  <div class="text-center">
+    <img src="/static/images/hotel.jpg" class="rounded" alt="hotel">
+  </div>
+  <figure class="text-center">
+  <h1 class="display-4"><strong>DOBRODOSLI!</strong></h1>
+  <h1 class="display-6"> <strong> HOTEL THE BEES  </STRONG></h1>
+  <a href="{{ url_for('render_sobe') }}" role="button" class="btn btn-outline-secondary">POGLEDAJTE PONUDU</a>
+  </figure>
+  <hr>
+  <figure class="text-center">
+    <h2 class="display-5">Za sve prijavljene korisnike na sajtu hotel The Bees pruzi mnoge pogodnosti!</h2>
+   
+    <a href="{{ url_for('render_prijava') }}" role="button" class="btn btn-outline-secondary">Prijavite se</a>
+    <a href="{{ url_for('render_novi') }}" role="button" class="btn btn-outline-secondary">Registrujte se</a>
+    </figure>
+
+{% endif %}
+{% if rola == 'administrator' %}
+<figure class="text-center">
+  <h1 class="display-4"><strong>ADMINISTRATORSKI NALOG!</strong></h1>
+  <h1 class="display-6"><strong>HOTEL THE BEES</STRONG></h1>
+</figure>
+{% elif rola == 'recepcija' %}
+<figure class="text-center">
+  <h1 class="display-4"><strong>NALOG ZA RECEPCIJU!</strong></h1>
+  <h1 class="display-6"><strong>HOTEL THE BEES</STRONG></h1>
+</figure>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xs-12">
+            <form action="{{ url_for('rezervacija_izmena', id=rezervacija.id) }}" method="POST">
+                <div class="form-group">
+                    <label for="ime">Ime</label>
+                    <input type="text" class="form-control" name="ime" value="{{ rezervacija.ime }}" required>
+                    <label for="prezime">Prezime</label>
+                    <input type="text" class="form-control" name="prezime" value="{{ rezervacija.prezime }}" required>
+                <label for="email">Email adresa</label>
+                <input type="email" name="email" class="form-control" value="{{ rezervacija.email }}" required>
+                <label for="brojOdraslih">Broj odraslih</label>
+                <input type="number" class="form-control" name="brojOdraslih" value={{ rezervacija.broj_odraslih }} required>
+                <label for="tip"> Tip smestaja</label>
+                <select class="form-select" name="tip">
+                    <option selected>--</option>
+                    <option  {% if rezervacija.tip=="single" %} selected {% endif %}  value="single">Sigle-Room</option>
+                    <option {% if rezervacija.tip=="double" %} selected {% endif %} value="double">Double-Room</option>
+                    <option {% if rezervacija.tip=="twin" %} selected {% endif %} value="twin">Twin-Room</option>
+                    <option {% if rezervacija.tip=="comfort1" %} selected {% endif %} value="comfort1">Comfort-Single-Room</option>
+                    <option {% if rezervacija.tip=="comfort2" %} selected {% endif %} value="comfort2">Comfort-Double-Room</option>
+                    <option {% if rezervacija.tip=="comfortTwin" %} selected {% endif %} value="comfortTwin">Comfort-Twin-Room</option>
+                  </select>
+                  
+                  <label for="datumD">Datum dolaska</label>
+                  <input type="date" class="form-control" name="datumD" value="{{ rezervacija.datum_dolaska }}"required>
+                  <label for="datumO"> Datum odlaska</label>
+                  <input type="date" class="form-control" name="datumO" value="{{ rezervacija.datum_odlaska }}" required>
+                    <label for="dorucak">
+                      Da li zelite dorucak?
+                    </label>
+                    <select name="dorucak" class="form-control">
+                        <option selected disabled>--</option>
+                        <option {% if rezervacija.dorucak=="da" %} selected {% endif %} value="da">Da</option>
+                        <option {% if rezervacija.dorucak=="ne" %} selected {% endif %} value="ne">Ne</option>
+                    </select>
+              
+                  <label for="svrha">
+                    Svrha boravka?
+                  </label>
+                  <select name="svrha" class="form-control">
+                      <option selected disabled>--</option>
+                      <option {% if rezervacija.svrha=="poslovno" %} selected {% endif %} value="poslovno">Poslovno</option>
+                      <option {% if rezervacija.svrha=="privatno" %} selected {% endif %} value="privatno">Privatno</option>
+                  </select>
+       
+                  <label for="poruka" class="form-label">Vasa poruka</label>
+                  <textarea class="form-control" name="poruka" value="{{ rezervacija.poruka }}"></textarea>
+
+                  
+
+
+
+                <input type="submit" class="btn btn-outline-secondary" role="button" value="POSALJI">
+             
+            </form>
+        </div>
+
+
+    </div>
+</div>
+</div>
+  {% endblock %} 

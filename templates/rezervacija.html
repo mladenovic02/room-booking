@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if rola == 'administrator' or rola == 'recepcija' %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/hotel.jpg" alt="Logo" width="100" height="80" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_naslovna')}}">POČETNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_sobe') }}">SMEŠTAJ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_korisnici')}}">KORISNICI</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_rezervacijaTabela')}}">REZERVACIJE</a>
+                </li>
+              
+                <li class="nav-item">
+                    
+                    {% if rola %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('odjava') }}" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+{% else %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/hotel.jpg" alt="Logo" width="100" height="80" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_naslovna')}}">POČETNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_sobe') }}">SMEŠTAJ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_onama')}}">O NAMA</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_kontakt')}}">KONTAKT</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('render_rezervacija')}}" role="button" class="btn btn-outline-secondary">REZERVIŠI ODMAH</a>
+                </li>
+                <li class="nav-item" class="justify-content-end">
+                    
+                    {% if rola %}
+    <li class="nav-item">
+        <a href="{{ url_for('odjava') }}" class="btn btn-outline-secondary">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+    </li>
+{% endif %}
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="nav justify-content-center">
+  
+    <li class="nav-item">
+        <i class="fa-regular fa-envelope"></i>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="mailto:info@hotel.com">info@hotel.com</a>
+      </li>
+      <li class="nav-item">
+        <i class="fa-solid fa-phone"></i>
+      </li>
+   
+      <li class="nav-item">
+        <a class="nav-link" href="#">066576344</a>
+      </li>
+  </ul>
+  <hr>
+  
+  <figure class="text-center">
+  <h1 class="display-6"><strong>REZERVISITE ONLINE</strong></h1>
+  <p class="fs-6">Poštovani, popunjavanjem ove forme šaljete zahtev za rezervaciju smeštaja.
+    Vaša rezervacija nije važeća sve dok od nas ne dobijete potvrdan odgovor putem E-pošte.
+    
+    Sa pozitivnim odgovorom Vaša rezervacija je sigurna i taj period je blokiran.</p>
+  </figure>
+  <hr>
+  {% endif %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xs-12">
+            <form action="#" method="POST" class="">
+                <div class="form-group">
+                    <label for="ime">Ime</label>
+                    <input type="text" class="form-control" name="ime" required>
+                    <label for="prezime">Prezime</label>
+                    <input type="text" class="form-control" name="prezime" required>
+                <label for="email">Email adresa</label>
+                <input type="email" name="email" class="form-control" required>
+                <label for="brojOdraslih">Broj odraslih</label>
+                <input type="number" class="form-control" name="brojOdraslih" required>
+                <label for="tip"> Tip smestaja</label>
+                <select class="form-select" name="tip">
+                    <option selected>--</option>
+                    <option value="single">Sigle-Room</option>
+                    <option value="double">Double-Room</option>
+                    <option value="twin">Twin-Room</option>
+                    <option value="comfort1">Comfort-Single-Room</option>
+                    <option value="comfort2">Comfort-Double-Room</option>
+                    <option value="comfortTwin">Comfort-Twin-Room</option>
+                  </select>
+                  
+                  <label for="datumD">Datum dolaska</label>
+                  <input type="date" class="form-control" name="datumD" required>
+                  <label for="datumO">Datum odlaska</label>
+                  <input type="date" class="form-control" name="datumO" required>
+                    <label for="dorucak">
+                      Da li zelite dorucak?
+                    </label>
+                    <select name="dorucak" class="form-control">
+                        <option selected disabled>--</option>
+                        <option value="da">Da</option>
+                        <option value="ne">Ne</option>
+                    </select>
+              
+                  <label for="svrha">
+                    Svrha boravka?
+                  </label>
+                  <select name="svrha" class="form-control">
+                      <option selected disabled>--</option>
+                      <option value="poslovno">Poslovno</option>
+                      <option value="privatno">Privatno</option>
+                  </select>
+       
+                  <label for="poruka" class="form-label">Vasa poruka</label>
+                  <textarea class="form-control" name="poruka"></textarea>
+
+                  
+
+
+
+                <input type="submit" class="btn btn-outline-secondary" role="button" value="POSALJI">
+             
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+  {% endblock %} 

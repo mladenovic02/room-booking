@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xs-12">
+            <form action="{{ url_for("soba_izmena", id=soba.id) }}" method="POST">
+                <div class="form-group">
+                    <label for="tip">Tip sobe</label>
+                    <input type="text" class="form-control" name="tip" value="{{ soba.tip }}" required>
+                </div>
+
+                  <div class="form-group">
+                    <label for="broj_slobodnih">Broj slobodnih soba</label>
+                    <input type="text" class="form-control" name="broj_slobodnih" value="{{ soba.broj_slobodnih }}" required>
+                </div>
+                <input type="hidden" name="id" value="{{ soba.id }}">
+                <input type="hidden" name="tip" value="{{ soba.tip }}"> <!-- Dodato skriveno polje za 'tip' -->
+                <input type="submit" class="btn btn-outline-secondary" role="button" value="Izmeni">
+            </form>
+            
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

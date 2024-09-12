@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xs-12">
+            <form action="{{ url_for('render_novasoba') }}" method="POST" enctype="multipart/form-data"> 
+                <div class="form-group">
+                    <label for="tip">Tip sobe</label>
+                    <input type="text" class="form-control" name="tip" required>
+                </div>
+                <div class="form-group">
+                    <label for="slika">Izaberite sliku</label>
+                    <input type="file" class="custom-file-input" name="slika" accept="image/*" id="slika_pregled" name="slika" required>
+                </div> 
+                <div class="form-group">
+                    <label for="broj_slobodnih">Broj slobodnih soba</label>
+                    <input type="text" class="form-control" name="broj_slobodnih" required>
+                <input type="submit" class="btn btn-outline-secondary" role="button" value="Dodaj">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

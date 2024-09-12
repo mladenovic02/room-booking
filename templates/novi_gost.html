@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/hotel.jpg" alt="Logo" width="100" height="80" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_naslovna')}}">POČETNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_sobe') }}">SMEŠTAJ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_onama')}}">O NAMA</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ url_for('render_kontakt')}}">KONTAKT</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('render_rezervacija')}}" role="button" class="btn btn-outline-secondary">REZERVIŠI ODMAH</a>
+                </li>
+                <li class="nav-item" class="justify-content-end">
+                    
+                    {% if rola %}
+    <li class="nav-item">
+        <a href="{{ url_for('odjava') }}" class="btn btn-outline-secondary">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+    </li>
+{% endif %}
+            
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="nav justify-content-center">
+  
+    <li class="nav-item">
+        <i class="fa-regular fa-envelope"></i>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="mailto:info@hotel.com">info@hotel.com</a>
+      </li>
+      <li class="nav-item">
+        <i class="fa-solid fa-phone"></i>
+      </li>
+   
+      <li class="nav-item">
+        <a class="nav-link" href="#">066576344</a>
+      </li>
+  </ul>
+  <hr>
+  
+  <figure class="text-center">
+  <h1 class="display-6"><strong>REGISTRACIJA</strong></h1>
+  <p class="fs-6">ZA SVE PRIJAVLJENE KORISNIKE NASEM SAJTU PRUZAMO MNOGE POGODNOSTI</p>
+  </figure>
+  <hr>
+
+
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-xs-12">
+            <form action="{{ url_for('render_novi') }}" method="POST" class=""> 
+                <div class="form-group">
+                    <label for="ime">Ime</label>
+                    <input type="text" class="form-control" name="ime" required>
+                    <label for="prezime">Prezime</label>
+                    <input type="text" class="form-control" name="prezime" required>
+                <labe for="email">Email adresa</label>
+                <input type="email" name="email" class="form-control" required>
+                <label for="lozinka">Lozinka</label>
+                <input type="password" class="form-control" name="lozinka" required>
+
+                <input type="hidden" name="rola" value="gost">
+            
+                <input type="submit" class="btn btn-outline-secondary" role="button" value="REGISTRUJ SE">
+             
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+  {% endblock %}
